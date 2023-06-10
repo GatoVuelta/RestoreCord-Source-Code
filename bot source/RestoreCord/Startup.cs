@@ -43,7 +43,7 @@ namespace RestoreCord
             provider.GetRequiredService<Custom>();
             provider.GetRequiredService<Command>();
             provider.GetRequiredService<Message>();
-            await _client.LoginAsync(TokenType.Bot, Properties.Resources.Token);
+            await _client.LoginAsync(TokenType.Bot, AppEnvironment.BOT_TOKEN);
             await _client.StartAsync();
             await Task.Delay(Timeout.Infinite);
         }

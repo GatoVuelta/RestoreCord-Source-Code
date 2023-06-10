@@ -33,7 +33,7 @@ namespace RestoreCord.Miscellaneous
             try
             {
                 var web = new WebClient();
-                web.Headers.Add("Authorization", $"Bot {Properties.Resources.Token}");
+                web.Headers.Add("Authorization", $"Bot {AppEnvironment.BOT_TOKEN}");
                 web.Headers.Add("X-RateLimit-Precision", "millisecond");
                 web.Headers.Add("User-Agent", "Gremlins Verification System (tm)");
                 web.Headers.Add("Content-Type", $"application/json");

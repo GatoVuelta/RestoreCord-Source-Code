@@ -106,8 +106,8 @@ namespace RestoreCord.Commands
                 web.Headers.Add("Content-Type", $"application/x-www-form-urlencoded");
                 var result = JsonConvert.DeserializeObject<API.RefreshTokenInfo>(Encoding.Default.GetString(web.UploadValues("https://discordapp.com/api/oauth2/token", new NameValueCollection
                 {
-                    ["client_id"] = Properties.Resources.ClientID,
-                    ["client_secret"] = Properties.Resources.ClientSecret,
+                    ["client_id"] = AppEnvironment.BOT_CLIENT_ID,
+                    ["client_secret"] = AppEnvironment.BOT_CLIENT_SECRET,
                     ["grant_type"] = "refresh_token",
                     ["refresh_token"] = member.refresh_token,
                     ["redirect_uri"] = AppEnvironment.BOT_REDIRECT_URI,
