@@ -24,6 +24,13 @@ namespace RestoreCord
                 GatewayIntents = GatewayIntents.AllUnprivileged,
                 UseSystemClock = false,
             });
+            // Check if environment variables are set
+            if (!AppEnvironment.Check()){
+                Console.WriteLine("Environment variables are not set!");
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey();
+                Environment.Exit(1);
+            }
         }
 
         private async Task RunAsync()

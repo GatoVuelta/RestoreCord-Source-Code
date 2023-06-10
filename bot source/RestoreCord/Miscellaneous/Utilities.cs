@@ -35,7 +35,7 @@ namespace RestoreCord.Miscellaneous
                 var web = new WebClient();
                 web.Headers.Add("Authorization", $"Bot {Properties.Resources.Token}");
                 web.Headers.Add("X-RateLimit-Precision", "millisecond");
-                web.Headers.Add("User-Agent", "tutorial-restore-system");
+                web.Headers.Add("User-Agent", "Gremlins Verification System (tm)");
                 web.Headers.Add("Content-Type", $"application/json");
                 string data = null;
                 if (server.roleid is null)
@@ -138,9 +138,9 @@ namespace RestoreCord.Miscellaneous
                 Color = Utilities.RandomDiscordColour(),
                 Author = new EmbedAuthorBuilder
                 {
-                    Url = "https://restorecord.com",
-                    Name = "RestoreCord",
-                    IconUrl = "https://i.imgur.com/Nfy4OoG.png"
+                    Url = AppEnvironment.API_URL,
+                    Name = "Gremlins Verification",
+                    IconUrl = "https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200"
                 },
                 Footer = new EmbedFooterBuilder
                 {
@@ -164,9 +164,9 @@ namespace RestoreCord.Miscellaneous
                 Color = Utilities.RandomDiscordColour(),
                 Author = new EmbedAuthorBuilder
                 {
-                    Url = "https://restorecord.com",
-                    Name = "RestoreCord",
-                    IconUrl = "https://i.imgur.com/Nfy4OoG.png"
+                    Url = AppEnvironment.API_URL,
+                    Name = "Gremlins Verification",
+                    IconUrl = "https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200"
                 },
                 Footer = new EmbedFooterBuilder
                 {

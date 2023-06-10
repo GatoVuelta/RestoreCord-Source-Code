@@ -14,7 +14,7 @@ namespace RestoreCord.Services
 
         private async Task BotReady(DiscordSocketClient bot)
         {
-            await bot.SetGameAsync("restorecord.com", null, Discord.ActivityType.Watching);
+            await bot.SetGameAsync("gremlins.pro", null, Discord.ActivityType.Watching);
             await bot.SetStatusAsync(Discord.UserStatus.Idle);
         }
     }

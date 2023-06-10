@@ -1,0 +1,11 @@
+#navbarSupportedContent {
+	background: hsl(224, 13%, 17%) !important;
+}
+
+#main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"], #main-wrapper[data-layout="horizontal"] .left-sidebar[data-sidebarbg="skin5"] ul, #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"], #main-wrapper[data-layout="vertical"] .left-sidebar[data-sidebarbg="skin5"] ul {
+	background: hsl(224, 13%, 10%) !important;
+}
+
+#main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin5"], #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin5"] {
+	background: hsl(224, 13%, 10%) !important;
+}

@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" sizes="300x250" href="https://i.imgur.com/Nfy4OoG.png">
+<link rel="icon" type="image/png" sizes="300x250" href="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&amp;display=swap" rel="stylesheet">
 <title>RestoreCord</title>
 <meta name="theme-color" content="#52ef52">
@@ -15,7 +15,7 @@
 <body class="bg-shinyGray overflow-x-hidden">
 <nav id="navigationBar" class="flex flex-row items-center justify-between p-6 bg-sweetBlack">
 <div class="left flex flex-row items-center ml-10 md:ml-20 text-white">
-<img src="https://i.imgur.com/Nfy4OoG.png" width="48px" height="48px" class="mr-2 hidden md:inline pointer-events-none noselect">
+<img src="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200" width="48px" height="48px" class="mr-2 hidden md:inline pointer-events-none noselect">
 <a href="https://www.youtube.com/watch?v=tCCP2oUxxEY" target="_blank" class="mx-4 text-xl hover:text-blurple hidden md:inline">Tutorial</a>
 <a href="https://docs.restorecord.com" target="_blank" class="mx-4 text-xl hover:text-blurple hidden md:inline">Documentation</a>
 <a href="https://discord.com/invite/s6gk5Y5fTC" target="_blank" class="mx-4 text-xl hover:text-blurple hidden md:inline">Support Server</a>

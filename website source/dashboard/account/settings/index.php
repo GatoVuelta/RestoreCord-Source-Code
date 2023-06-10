@@ -47,7 +47,7 @@ $isadmin = $row['admin'];
     <meta name="robots" content="noindex,nofollow">
     <title>RestoreCord - Account Settings</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="300x250" href="https://i.imgur.com/Nfy4OoG.png">
+    <link rel="icon" type="image/png" sizes="300x250" href="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200">
 	<script src="https://cdn.keyauth.uk/dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Custom CSS -->
 	<link href="https://cdn.keyauth.uk/dashboard/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -55,6 +55,7 @@ $isadmin = $row['admin'];
     <link href="https://cdn.keyauth.uk/dashboard/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="https://cdn.keyauth.uk/dashboard/dist/css/style.min.css" rel="stylesheet">
+<link href="<?php echo AppEnvironment::$api_url ?>/styles/custom.css" rel="stylesheet">
 	
 
 	<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
@@ -92,7 +93,7 @@ $isadmin = $row['admin'];
                     <a class="navbar-brand">
                         <!-- Logo icon -->
                         <b class="logo-icon">
-                            <img src="https://i.imgur.com/Nfy4OoG.png" width="48px" height="48px" class="mr-2 hidden md:inline pointer-events-none noselect">
+                            <img src="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200" width="48px" height="48px" class="mr-2 hidden md:inline pointer-events-none noselect">
                         </b>
                     </a>
                     <!-- ============================================================== -->
@@ -120,23 +121,23 @@ $isadmin = $row['admin'];
                         <!-- ============================================================== -->
                         <!-- create new -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle waves-effect waves-dark" href="../../../discord/" target="discord"> <i class="mdi mdi-discord font-24"></i>
 						</a>
 						</li>
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle waves-effect waves-dark" href="../../../telegram/" target="telegram"> <i class="mdi mdi-telegram font-24"></i>
 						</a>
-						</li>
+						</li> -->
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://i.imgur.com/w65Dpnw.png" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15 bg-primary text-white mb-2">
-                                    <div class=""><img src="https://i.imgur.com/w65Dpnw.png" alt="user" class="img-circle" width="60"></div>
+                                    <div class=""><img src="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200" alt="user" class="img-circle" width="60"></div>
                                     <div class="ml-2">
                                         <h4 class="mb-0"><?php echo $_SESSION['username']; ?></h4>
                                         <p class=" mb-0"><?php echo $_SESSION['email']; ?></p>

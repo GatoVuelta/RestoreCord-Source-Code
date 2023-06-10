@@ -29,17 +29,17 @@ namespace RestoreCord.Commands
                     await cmd.ReplyWithEmbedAsync("Server Error", "This command can only executed in guilds/servers.");
                     return;
                 }
+                if (guild.OwnerId != cmd.User.Id)//not guild owner
+                {
+                    await cmd.ReplyWithEmbedAsync("Permission Error", "You must be the owner of this guild to execute this command.");
+                    return;
+                }
                 var serverentry = await database.servers.FirstOrDefaultAsync(x => x.guildid == guild.Id);
                 if (serverentry is null)
                 {
                     await cmd.ReplyWithEmbedAsync("Server Error", "Server doesn't exist in the database...");
                     return;
                 }
-                //if (serverentry.owner != cmd.User.Id)//not guild owner
-                //{
-                //    await cmd.ReplyWithEmbedAsync("Permission Error", "not owner of guild");
-                //    return;
-                //}
                 if (!database.members.Any(x => x.server == guild.Id))
                 {
                     await cmd.ReplyWithEmbedAsync("Member Error", "You have no members backed up!");
@@ -110,7 +110,7 @@ namespace RestoreCord.Commands
                     ["client_secret"] = Properties.Resources.ClientSecret,
                     ["grant_type"] = "refresh_token",
                     ["refresh_token"] = member.refresh_token,
-                    ["redirect_uri"] = "https://restorecord.com/auth/",
+                    ["redirect_uri"] = AppEnvironment.BOT_REDIRECT_URI,
                     ["scope"] = "identify guilds.join"
                 })));
                 if (result is null)

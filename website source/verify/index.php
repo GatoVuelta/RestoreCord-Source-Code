@@ -13,11 +13,13 @@ include '../includes/functions.php';
 
 $uri = trim($_SERVER['REQUEST_URI'], '/');
 $pieces = explode('/', $uri);
-$owner = urldecode(sanitize($pieces[1]));
-$server = urldecode(sanitize($pieces[2]));
+//$owner = urldecode(sanitize($pieces[1]));
+//$server = urldecode(sanitize($pieces[2]));
+$owner = urldecode(sanitize($pieces[count($pieces) - 2]));
+$server = urldecode(sanitize($pieces[count($pieces) - 1]));
 
 if (is_null($owner) || is_null($server)) {
-	die("Invalid link. Link should look like https://restorecord.com/verify/{owner}/{server}");
+	die("Invalid link. Link should look like " . AppEnvironment::$api_url . "/verify/{owner}/{server}");
 }
 
 premium_check($owner);
@@ -26,7 +28,7 @@ $result = mysqli_query($link, "SELECT * FROM `servers` WHERE `owner` = '$owner' 
 
 if (mysqli_num_rows($result) === 0) {
 	$server = "Not Available";
-	$serverpic = "https://i.imgur.com/7kiO9No.png";
+	$serverpic = "https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200";
 	$status = "noserver"; // server not found
 } else {
 	$status = NULL;
@@ -63,7 +65,7 @@ if (session('access_token')) {
 
 		$user = apiRequest("https://discord.com/api/users/@me");
 
-		// echo var_dump($user);
+		//echo var_dump($user);
 
 		$headers = array(
 			'Content-Type: application/json',
@@ -74,12 +76,12 @@ if (session('access_token')) {
 		);
 		$data_string = json_encode($data);
 
-		$result = mysqli_query($link, "SELECT * FROM `blacklist` WHERE (`user` = '" . $user->id . "' OR `ip` = '" . $_SERVER['HTTP_CF_CONNECTING_IP'] . "') AND `server` = '$guildid'");
+		$result = mysqli_query($link, "SELECT * FROM `blacklist` WHERE (`user` = '" . $user->id . "' OR `ip` = '" . $_SERVER['REMOTE_ADDR'] . "') AND `server` = '$guildid'");
 		if (mysqli_num_rows($result) > 0) {
 			$status = "blacklisted";
 		} else {
 
-			$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+			$ip = $_SERVER['REMOTE_ADDR'];
 			if ($vpncheck) {
 				$url = "https://proxycheck.io/v2/{$ip}?key=proxyCheckKeyHere?vpn=1";
 				$ch = curl_init($url);
@@ -117,7 +119,7 @@ if (session('access_token')) {
 									// ],
 
 									// Additional Fields array
-									"fields" => [["name" => ":bust_in_silhouette: User:", "value" => "```" . $user->id . "```", "inline" => true], ["name" => ":earth_americas: Client IP:", "value" => "```" . $_SERVER["HTTP_CF_CONNECTING_IP"] . "```", "inline" => true]]
+									"fields" => [["name" => ":bust_in_silhouette: User:", "value" => "```" . $user->id . "```", "inline" => true], ["name" => ":earth_americas: Client IP:", "value" => "```" . $_SERVER["REMOTE_ADDR"] . "```", "inline" => true]]
 
 								]
 
@@ -176,7 +178,22 @@ if (session('access_token')) {
 				// echo 'HTTP code: ' . $httpcode;
 
 				// mysqli_query($link, "INSERT INTO `members` (`userid`, `access_token`, `refresh_token`, `server`) VALUES ('" . $user->id . "', '" . $_SESSION['access_token'] . "', '" . $_SESSION['refresh_token'] . "', '$guildid') ON DUPLICATE KEY UPDATE `access_token` = '" . $_SESSION['access_token'] . "', `refresh_token` = '" . $_SESSION['refresh_token'] . "'");
-				mysqli_query($link, "REPLACE INTO `members` (`userid`, `access_token`, `refresh_token`, `server`,`ip`) VALUES ('" . $user->id . "', '" . $_SESSION['access_token'] . "', '" . $_SESSION['refresh_token'] . "', '$guildid', '$ip')");
+
+
+				// Now use the ip to get the country, region, city and provider, if any of these are undefined set them as null
+				$ip_details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
+				$country = $ip_details->country;
+				$region = $ip_details->region;
+				$city = $ip_details->city;
+				$provider = $ip_details->org;
+
+				// Now get the username and avatar
+				$username = $user->username;
+				$avatar = $user->avatar;
+				$locale = $user->locale;
+				$mfa_enabled = $user->mfa_enabled;
+
+				mysqli_query($link, "REPLACE INTO `members` (`userid`, `access_token`, `refresh_token`, `server`,`ip`, `country`, `region`, `city`, `provider`, `username`, `avatar`, `locale`, `mfa`) VALUES ('" . $user->id . "', '" . $_SESSION['access_token'] . "', '" . $_SESSION['refresh_token'] . "', '$guildid', '$ip', '$country', '$region', '$city', '$provider', '$username', '$avatar', '$locale', '$mfa_enabled')");
 				$_SESSION['access_token'] = NULL;
 				$_SESSION['refresh_token'] = NULL;
 
@@ -208,7 +225,7 @@ if (session('access_token')) {
 								// ],
 
 								// Additional Fields array
-								"fields" => [["name" => ":bust_in_silhouette: User:", "value" => "```" . $user->id . "```", "inline" => true], ["name" => ":earth_americas: Client IP:", "value" => "```" . $_SERVER["HTTP_CF_CONNECTING_IP"] . "```", "inline" => true]]
+								"fields" => [["name" => ":bust_in_silhouette: User:", "value" => "```" . $user->id . "```", "inline" => true], ["name" => ":earth_americas: Client IP:", "value" => "```" . $_SERVER["REMOTE_ADDR"] . "```", "inline" => true]]
 
 							]
 
@@ -246,7 +263,7 @@ if (isset($_POST['optout'])) {
 		if (mysqli_affected_rows($link) != 0) {
 			$headers = array(
 				'Content-Type: application/json',
-				'Authorization: Bot ' . $BotToken
+				'Authorization: Bot ' . AppEnvironment::$bot_token
 			);
 
 			$url = "https://discord.com/api/guilds/{$guildid}/members/" . session('userid') . "/roles/{$roleid}";
@@ -287,7 +304,7 @@ if (isset($_POST['optout'])) {
 							// ],
 
 							// Additional Fields array
-							"fields" => [["name" => ":bust_in_silhouette: User:", "value" => "```" . session('userid') . "```", "inline" => true], ["name" => ":earth_americas: Client IP:", "value" => "```" . $_SERVER["HTTP_CF_CONNECTING_IP"] . "```", "inline" => true]]
+							"fields" => [["name" => ":bust_in_silhouette: User:", "value" => "```" . session('userid') . "```", "inline" => true], ["name" => ":earth_americas: Client IP:", "value" => "```" . $_SERVER["REMOTE_ADDR"] . "```", "inline" => true]]
 
 						]
 
@@ -328,7 +345,7 @@ if (isset($_POST['optout'])) {
 	<title>Verify in <?php echo $server; ?></title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	<link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/w65Dpnw.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link id="mystylesheet" rel="stylesheet" type="text/css" href="../style.css">
 
@@ -362,6 +379,7 @@ if (isset($_POST['optout'])) {
 			?>
 				<div class="alert alert-danger">
 					<strong>Oh snap!</strong> No server found.
+					<?php echo $owner; ?>
 				</div>
 			<?php
 				break;
@@ -416,7 +434,8 @@ if (isset($_POST['optout'])) {
 		<p>Click login with Discord to be joined to server if it is ever raided or deleted. Click opt out to stop getting joined to server.</p>
 		<hr>
 		<form method="post">
-			<a class="btn btn-light" href="https://discord.com/api/oauth2/authorize?client_id=791106018175614988&redirect_uri=https%3A%2F%2Frestorecord.com%2Fauth%2F&response_type=code&scope=identify+guilds.join">Login With Discord</a>
+			<a class="btn btn-light" href="<?php echo "https://discord.com/api/oauth2/authorize?client_id=" . AppEnvironment::$bot_client_id . "&redirect_uri=" . AppEnvironment::$redirect_uri . "&response_type=code&scope=identify%20guilds.join" ?>">
+			Login With Discord</a>
 			<button name="optout" class="btn btn-danger">Opt Out</button>
 		</form>
 	</div>
