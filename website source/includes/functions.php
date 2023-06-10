@@ -1,5 +1,7 @@
 <?php
 
+require_once 'connection.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -21,10 +23,13 @@ function heador()
     global $role; // needed to refrence role
 		?>
         <form class="text-left" method="POST">
-		<p class="mb-4">Name:
+		<p class="mb-4">Server Name:
 			<br><?php echo $_SESSION['server_to_manage']; ?><br />
 			<div class="mb-4">Verify Link:
-                <br><a href="<?php echo "https://". ($_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME']) . "/verify/" . $_SESSION['username'] . "/" . $_SESSION['server_to_manage']; ?>" style="color:#00FFFF;" target="verifylink"><?php echo "https://". ($_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME']) . "/verify/" . $_SESSION['username'] . "/" . $_SESSION['server_to_manage']; ?></a><br />
+                <br>
+                <a href="<?php echo AppEnvironment::$api_url . "/verify/" . $_SESSION['username'] . "/" . $_SESSION['server_to_manage']; ?>" style="color:#00FFFF;" target="verifylink">
+                    <?php echo AppEnvironment::$api_url . "/verify/" . $_SESSION['username'] . "/" . $_SESSION['server_to_manage']; ?>
+                </a><br />
 			</div><a style="color:#4e73df;cursor: pointer;" id="mylink">Change</a>
 			<button style="border: none;padding:0;background:0;color:#FF0000;padding-left:5px;" name="deleteserver" onclick="return confirm('Are you sure you want to delete server and all associated members?')">Delete</button>
 		</p>
@@ -144,9 +149,10 @@ function sidebar($admin)
 	<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../server/settings/" aria-expanded="false"><i data-feather="settings"></i><span class="hide-menu">Settings</span></a></li> 
 	<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../server/members/" aria-expanded="false"><i data-feather="users"></i><span class="hide-menu">Members</span></a></li>
 	<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../server/blacklist/" aria-expanded="false"><i data-feather="user-x"></i><span class="hide-menu">Blacklist</span></a></li>
+    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="JavaScript:newPopup('https://discord.com/oauth2/authorize?client_id=<?php echo AppEnvironment::$bot_client_id;?>&permissions=268435457&scope=applications.commands%20bot');" aria-expanded="false" ><i data-feather="plus"></i><span class="hide-menu">Add Bot</span></a></li>
+    
 	<li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Account</span></li>
 	<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../account/settings/" aria-expanded="false"><i data-feather="settings"></i><span class="hide-menu">Settings</span></a></li>
-	<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../account/upgrade/" aria-expanded="false"><i data-feather="activity"></i><span class="hide-menu">Upgrade</span></a></li>
 	<?php
 	if($admin)
 	{
@@ -201,28 +207,54 @@ function premium_check($username)
 	}
 }
 
-function apiRequest($url, $post = FALSE, $headers=array()) {
-  
-  $ch = curl_init($url);
-  curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+function apiRequest($url, $post = FALSE, $headers = array()) {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    
+    if ($post) {
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+    }
 
-  $response = curl_exec($ch);
+    $headers[] = 'Accept: application/json';
 
+    if (session('access_token'))
+        $headers[] = 'Authorization: Bearer ' . session('access_token');
 
-  if($post)
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-  $headers[] = 'Accept: application/json';
-
-  if(session('access_token'))
-    $headers[] = 'Authorization: Bearer ' . session('access_token'); 
-
-  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-  $response = curl_exec($ch);
-  return json_decode($response);
+    $response = curl_exec($ch);
+    return json_decode($response);
 }
+
+function send_multipart_post_request($url, $data, $headers = array()) {
+    $postData = http_build_query($data);
+    $headerOptions = array(
+        'Content-type: application/x-www-form-urlencoded',
+        'Content-Length: ' . strlen($postData)
+    );
+    $headerOptions = array_merge($headerOptions, $headers);
+
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headerOptions);
+
+    $response = curl_exec($curl);
+
+    if (curl_errno($curl)) {
+        $error = curl_error($curl);
+        curl_close($curl);
+        throw new Exception('HTTP POST request failed: ' . $error);
+    }
+
+    curl_close($curl);
+
+    return $response;
+}
+
 
 function wh_log($webhook_url, $msg, $un)
 {

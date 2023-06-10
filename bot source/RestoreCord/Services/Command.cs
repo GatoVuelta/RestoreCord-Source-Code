@@ -48,6 +48,7 @@ namespace RestoreCord.Services
                 ////slashCommandOptionBuilder.WithRequired(true); // Only add this if you want it to be required
 
                 SlashCommandBuilder pullCommand = new();
+                pullCommand.WithDefaultPermission(false);
                 pullCommand.WithName("pull");
                 pullCommand.WithDescription("Pull all Discord users into this server.");
                 applicationCommandProperties.Add(pullCommand.Build());

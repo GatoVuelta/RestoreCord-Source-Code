@@ -76,7 +76,7 @@ CREATE TABLE `servers` (
   `guildid` bigint(18) DEFAULT NULL,
   `roleid` bigint(18) DEFAULT NULL,
   `redirecturl` varchar(2048) DEFAULT NULL,
-  `pic` varchar(2048) NOT NULL DEFAULT 'https://i.imgur.com/w65Dpnw.png',
+  `pic` varchar(2048) NOT NULL DEFAULT 'https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200',
   `vpncheck` int(1) DEFAULT 0,
   `webhook` varchar(120) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -93,7 +93,7 @@ CREATE TABLE `users` (
   `email` varchar(320) NOT NULL,
   `password` varchar(60) NOT NULL,
   `role` varchar(7) NOT NULL DEFAULT 'free',
-  `pfp` varchar(2048) NOT NULL DEFAULT 'https://i.imgur.com/w65Dpnw.png',
+  `pfp` varchar(2048) NOT NULL DEFAULT 'https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200',
   `banned` varchar(69) DEFAULT NULL,
   `twofactor` int(1) NOT NULL DEFAULT 0,
   `googleAuthCode` varchar(16) DEFAULT NULL,

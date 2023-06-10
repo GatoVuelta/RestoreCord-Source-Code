@@ -46,7 +46,7 @@ $isadmin = $row['admin'];
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RestoreCord - Blacklist</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/w65Dpnw.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200">
     <script src="https://cdn.keyauth.uk/dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Custom CSS -->
     <link href="https://cdn.keyauth.uk/dashboard/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -54,6 +54,7 @@ $isadmin = $row['admin'];
     <link href="https://cdn.keyauth.uk/dashboard/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="https://cdn.keyauth.uk/dashboard/dist/css/style.min.css" rel="stylesheet">
+<link href="<?php echo AppEnvironment::$api_url ?>/styles/custom.css" rel="stylesheet">
 
 
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
@@ -88,8 +89,8 @@ $isadmin = $row['admin'];
     ?>
                 <script type='text/javascript'>
                     $(document).ready(function() {
-                        $("#content").fadeIn(1900);
-                        $("#sticky-footer bg-white").fadeIn(1900);
+                        $("#content").fadeIn(300);
+                        $("#sticky-footer bg-white").fadeIn(300);
                     });
                 </script>
             <?php
@@ -100,7 +101,7 @@ $isadmin = $row['admin'];
             ?>
                 <script type='text/javascript'>
                     $(document).ready(function() {
-                        $("#changeapp").fadeIn(1900);
+                        $("#changeapp").fadeIn(300);
                     });
                 </script>
             <?php
@@ -112,7 +113,7 @@ $isadmin = $row['admin'];
             ?>
             <script type='text/javascript'>
                 $(document).ready(function() {
-                    $("#createapp").fadeIn(1900);
+                    $("#createapp").fadeIn(300);
                 });
             </script>
         <?php
@@ -124,8 +125,8 @@ $isadmin = $row['admin'];
         ?>
         <script type='text/javascript'>
             $(document).ready(function() {
-                $("#content").fadeIn(1900);
-                $("#sticky-footer bg-white").fadeIn(1900);
+                $("#content").fadeIn(300);
+                $("#sticky-footer bg-white").fadeIn(300);
             });
         </script>
     <?php
@@ -157,7 +158,7 @@ $isadmin = $row['admin'];
                     <a class="navbar-brand">
                         <!-- Logo icon -->
                         <b class="logo-icon">
-                            <img src="https://i.imgur.com/Nfy4OoG.png" width="48px" height="48px" class="mr-2 hidden md:inline pointer-events-none noselect">
+                            <img src="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200" width="48px" height="48px" class="mr-2 hidden md:inline pointer-events-none noselect">
                         </b>
                     </a>
                     <!-- ============================================================== -->
@@ -185,23 +186,23 @@ $isadmin = $row['admin'];
                         <!-- ============================================================== -->
                         <!-- create new -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="../../../discord/" target="discord"> <i class="mdi mdi-discord font-24"></i>
                             </a>
-                        </li>
-                        <li class="nav-item dropdown">
+                        </li> -->
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="../../../telegram/" target="telegram"> <i class="mdi mdi-telegram font-24"></i>
                             </a>
-                        </li>
+                        </li> -->
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://i.imgur.com/w65Dpnw.png" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15 bg-primary text-white mb-2">
-                                    <div class=""><img src="https://i.imgur.com/w65Dpnw.png" alt="user" class="img-circle" width="60"></div>
+                                    <div class=""><img src="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200" alt="user" class="img-circle" width="60"></div>
                                     <div class="ml-2">
                                         <h4 class="mb-0"><?php echo $_SESSION['username']; ?></h4>
                                         <p class=" mb-0"><?php echo $_SESSION['email']; ?></p>
@@ -312,7 +313,7 @@ $isadmin = $row['admin'];
 
                         $(document).ready(function() {
                             $("#changeapp").fadeOut(100);
-                            $("#createapp").fadeIn(1900);
+                            $("#createapp").fadeIn(300);
                         });
 
                     }
@@ -354,8 +355,6 @@ $isadmin = $row['admin'];
                     <div class="col-12">
                         <?php heador($role, $link); ?>
                         <br>
-                        <a href="JavaScript:newPopup('https://discord.com/oauth2/authorize?client_id=791106018175614988&permissions=268435457&scope=applications.commands%20bot');" class="btn btn-info"> <i class="fab fa-discord"></i> Add Bot</a>
-                        <br>
                         <br>
                         <script type="text/javascript">
                             var myLink = document.getElementById('mylink');
@@ -365,7 +364,7 @@ $isadmin = $row['admin'];
 
                                 $(document).ready(function() {
                                     $("#content").fadeOut(100);
-                                    $("#changeapp").fadeIn(1900);
+                                    $("#changeapp").fadeIn(300);
                                 });
 
                             }
@@ -377,7 +376,14 @@ $isadmin = $row['admin'];
                                         <thead>
                                             <tr>
                                                 <th>User</th>
-                                                <th>IP Address</th>
+                                                <th>ID</th>
+                                                <th>IP</th>
+                                                <th>MFA</th>
+                                                <th>Locale</th>
+                                                <th>Country</th>
+                                                <th>Region</th>
+                                                <th>City</th>
+                                                <th>ISP</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -399,8 +405,25 @@ $isadmin = $row['admin'];
 
                                                     <tr>
 
+                                                    <td>
+                                                        <!-- Here print the username next to it's avatar -->
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://cdn.discordapp.com/avatars/<?php echo $user; ?>/<?php echo $row['avatar']; ?>.png" width="32px" height="32px" class="mr-2 hidden md:inline pointer-events-none noselect rounded-circle">
+                                                            <?php echo $row['username']; ?>
+                                                        </div>
+                                                        </td>
                                                         <td><?php echo $user; ?></td>
                                                         <td><?php echo $row['ip']; ?></td>
+                                                        <td><?php if ($row['mfa'] == 1) {
+                                                                echo "Yes";
+                                                            } else {
+                                                                echo "No";
+                                                            } ?></td>
+                                                        <td><?php echo $row['locale']; ?></td>
+                                                        <td><?php echo $row['country']; ?></td>
+                                                        <td><?php echo $row['region']; ?></td>
+                                                        <td><?php echo $row['city']; ?></td>
+                                                        <td><?php echo $row['provider']; ?></td>
 
                                                         <form method="POST">
                                                             <td><button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -421,7 +444,14 @@ $isadmin = $row['admin'];
                                         <tfoot>
                                             <tr>
                                                 <th>User</th>
-                                                <th>IP Address</th>
+                                                <th>ID</th>
+                                                <th>IP</th>
+                                                <th>MFA</th>
+                                                <th>Locale</th>
+                                                <th>Country</th>
+                                                <th>Region</th>
+                                                <th>City</th>
+                                                <th>ISP</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -486,7 +516,7 @@ $isadmin = $row['admin'];
             <footer class="footer text-center">
                 Copyright &copy; <script>
                     document.write(new Date().getFullYear())
-                </script> RestoreCord
+                </script> Gremlins Verification made by @gatovuelta
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

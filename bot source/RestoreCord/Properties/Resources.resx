@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClientID" xml:space="preserve">
-    <value>discordIdHere</value>
+    <value>1116503929962889359</value>
   </data>
   <data name="ClientSecret" xml:space="preserve">
-    <value>clientSecretHere</value>
+    <value>UetvLMt0OgywWO6lbUCUqy0HVTLeWa4V</value>
   </data>
   <data name="MySQLPass" xml:space="preserve">
-    <value>databasePasswordHere</value>
+    <value></value>
   </data>
   <data name="TestClientID" xml:space="preserve">
     <value />
@@ -136,6 +136,6 @@
     <value>ignore</value>
   </data>
   <data name="Token" xml:space="preserve">
-    <value>botTokenHere</value>
+    <value>MTExNjUwMzkyOTk2Mjg4OTM1OQ.G7y3_j.Qa0OagwsAi5hu-R938Nt2kzAe_4-0P_g93gBhA</value>
   </data>
 </root>

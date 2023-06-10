@@ -18,7 +18,7 @@ if (isset($_SESSION['username']))
 <head>
 	<title>RestoreCord - Login</title>
 	
-	<link rel="icon" type="image/png" sizes="300x250" href="https://i.imgur.com/Nfy4OoG.png">
+	<link rel="icon" type="image/png" sizes="300x250" href="https://media.discordapp.net/attachments/1115806906565529620/1115829275736686612/Gremlins_Logo_by_alenoffline5317.png?width=200&height=200">
 	<meta name="theme-color" content="#52ef52"/>
 	<meta name="description" content="Backup Discord members and add them to new server in the event of a server raid or deletion."/>
 	<meta name="og:image" content="https://i.imgur.com/zhLwuR4.png"/>
@@ -58,17 +58,14 @@ if (isset($_SESSION['username']))
 					<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 					
 					<div class="flex-sb-m w-full p-t-3 p-b-24">
-						<div>
-							<a href="../register/" class="txt1">
-								Register
-							</a>
-						</div>
-
-						<div>
+						<!-- <div>
 							<a href="../forgot/" class="txt1">
 								Forgot?
 							</a>
-						</div>
+						</div> -->
+						<a href="../" class="txt1">
+							Home
+						</a>
 					</div>
 
 					<div class="container-login100-form-btn m-t-17">
@@ -94,7 +91,7 @@ if (isset($_POST['login']))
 
     if (mysqli_num_rows($result) == 0)
     {
-        error("Account doesn\'t exist!");
+        error("Account doesn't exist!");
         return;
     }
     while ($row = mysqli_fetch_array($result))
